@@ -35,7 +35,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val totalValue = (distance * price) / autonomy
                 textTotalValue.text = "R$ ${"%.2f".format(totalValue)}"
             } catch (nfe: NumberFormatException) {
-                Toast.makeText(this, getString(R.string.porfavor_informar_numeros), Toast.LENGTH_LONG)
+                Toast.makeText(
+                    this,
+                    getString(R.string.porfavor_informar_numeros),
+                    Toast.LENGTH_LONG
+                )
                     .show()
             }
 
@@ -45,13 +49,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun validateOk(): Boolean {
-        return (editDistancia.text.toString() != ""
-                && editPreco.text.toString() != ""
-                && editAutonomia.text.toString() != ""
-                && editAutonomia.text.toString() != "0"
-                && editPreco.text.toString() != "0"
-                && editDistancia.text.toString() != "0")
-
+    private fun isNotNullOrEmpty(text: String): Boolean {
+        return text != "" && text != "0"
     }
+
+    private fun validateOk(): Boolean = isNotNullOrEmpty(editDistancia.text.toString()) &&
+                isNotNullOrEmpty(editPreco.text.toString()) &&
+                isNotNullOrEmpty(editAutonomia.text.toString())
 }
